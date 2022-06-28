@@ -1,15 +1,12 @@
 # security_scoped_resource
 
-A new Flutter plugin project.
+[![Pub](https://img.shields.io/pub/v/security_scoped_resource?color=green)](https://pub.dev/packages/security_scoped_resource)
 
-## Getting Started
+Allows an iOS Flutter App to access a greater scope of the file system
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+## Usage
 
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
+```dart
+await SecurityScopedResource.instance.startAccessingSecurityScopedResource(dir);
+await SecurityScopedResource.instance.stopAccessingSecurityScopedResource(dir);
+```
