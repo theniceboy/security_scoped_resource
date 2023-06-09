@@ -19,4 +19,15 @@ class SecurityScopedResource {
     return await _channel
         .invokeMethod('stopAccessingSecurityScopedResource', {'dir': dir.absolute.path});
   }
+
+  Future<bool> startAccessingSecurityScopedResourceFile(File file) async {
+    return await _channel
+        .invokeMethod('startAccessingSecurityScopedResourceFile', {'file': file.absolute.path});
+  }
+
+  /// Frees association with the security scoped resource.
+  Future<bool> stopAccessingSecurityScopedResourceFile(File file) async {
+    return await _channel
+        .invokeMethod('stopAccessingSecurityScopedResourceFile', {'file': file.absolute.path});
+  }
 }
