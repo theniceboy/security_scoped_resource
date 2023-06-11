@@ -9,14 +9,20 @@ class SecurityScopedResource {
 
   /// Grant access to a directory
   /// Call [stopAccessingSecurityScopedResource] when you're done
-  Future<bool> startAccessingSecurityScopedResource(Directory dir) async {
-    return await _channel
-        .invokeMethod('startAccessingSecurityScopedResource', {'dir': dir.absolute.path});
+  Future<bool> startAccessingSecurityScopedResource(FileSystemEntity entity) async {
+    assert(entity is File || entity is Directory, "Entity should be a File or a Directory");
+    return await _channel.invokeMethod('startAccessingSecurityScopedResource', {
+      'path': entity.absolute.path,
+      'isDirectory': entity is Directory,
+    });
   }
 
   /// Frees association with the security scoped resource.
-  Future<bool> stopAccessingSecurityScopedResource(Directory dir) async {
-    return await _channel
-        .invokeMethod('stopAccessingSecurityScopedResource', {'dir': dir.absolute.path});
+  Future<bool> stopAccessingSecurityScopedResource(FileSystemEntity entity) async {
+    assert(entity is File || entity is Directory, "Entity should be a File or a Directory");
+    return await _channel.invokeMethod('stopAccessingSecurityScopedResource', {
+      'path': entity.absolute.path,
+      'isDirectory': entity is Directory,
+    });
   }
 }

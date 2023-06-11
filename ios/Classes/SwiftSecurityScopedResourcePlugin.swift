@@ -16,18 +16,18 @@ public class SwiftSecurityScopedResourcePlugin: NSObject, FlutterPlugin, UIDocum
         
         switch call.method {
         case "startAccessingSecurityScopedResource":
-            guard let dir = args["dir"] as? String else {
-                result(FlutterError(code: "InvalidArguments", message: "argument 'dir' is not a Stirng", details: nil))
+            guard let dir = args["path"] as? String, let isDirectory = args["isDirectory"] as? Bool else {
+                result(FlutterError(code: "InvalidArguments", message: "argument 'path' is not a String or argument 'isDirectory' is not a Bool", details: nil))
                 return
             }
-            let url = URL(fileURLWithPath: dir, isDirectory: true)
+            let url = URL(fileURLWithPath: dir, isDirectory: isDirectory)
             result(url.startAccessingSecurityScopedResource())
         case "stopAccessingSecurityScopedResource":
-            guard let dir = args["dir"] as? String else {
-                result(FlutterError(code: "InvalidArguments", message: "argument 'dir' is not a Stirng", details: nil))
+            guard let dir = args["path"] as? String, let isDirectory = args["isDirectory"] as? Bool else {
+                result(FlutterError(code: "InvalidArguments", message: "argument 'path' is not a String or argument 'isDirectory' is not a Bool", details: nil))
                 return
             }
-            let url = URL(fileURLWithPath: dir, isDirectory: true)
+            let url = URL(fileURLWithPath: dir, isDirectory: isDirectory)
             url.stopAccessingSecurityScopedResource()
             result(true)
         default:
